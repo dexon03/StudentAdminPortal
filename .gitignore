@@ -725,3 +725,4 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,jetbrains+all,aspnetcore,angular,visualstudiocode,visualstudio,actionscript
 **/Migrations
+**/.vscode
