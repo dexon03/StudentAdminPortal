@@ -12,8 +12,16 @@ public class SqlStudentRepository : IStudentRepository
     {
         _context = context;
     }
-    public async Task<List<Student>> GetStudentsAsync()
+    public async Task<List<Student?>> GetStudentsAsync()
     {
        return await _context.Students.Include(nameof(Gender)).Include(nameof(Address)).ToListAsync();
+    }
+
+    public async Task<Student> GetStudentAsync(Guid studentId)
+    {
+        return await _context.Students
+            .Include(nameof(Gender))
+            .Include(nameof(Address))
+            .FirstOrDefaultAsync(x => x.Id == studentId);
     }
 }

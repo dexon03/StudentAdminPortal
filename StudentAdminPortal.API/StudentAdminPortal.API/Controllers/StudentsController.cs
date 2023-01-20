@@ -24,6 +24,17 @@ public class StudentsController : Controller
         
         return Ok(_mapper.Map<List<Student>>(students));
     }
-    
+
+
+    [HttpGet]
+    [Route("[controller]/{studentId:guid}")]
+    public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
+    {
+        // Fetch student detail
+        var student = await  _repository.GetStudentAsync(studentId);
+
+        // Return student
+        return student is null ? NotFound() : Ok(_mapper.Map<Student>(student));
+    }
     
 }
