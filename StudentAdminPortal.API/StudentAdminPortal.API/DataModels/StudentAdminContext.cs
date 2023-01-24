@@ -6,6 +6,7 @@ public class StudentAdminContext : DbContext
 {
     public StudentAdminContext(DbContextOptions<StudentAdminContext> options) : base(options)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     
     public DbSet<Student?> Students { get; set; }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StudentAdminPortal.API.DomainModels;
 using StudentAdminPortal.API.Repositories;
 using Student = StudentAdminPortal.API.DomainModels.Student;
 
@@ -7,12 +8,12 @@ namespace StudentAdminPortal.API.Controllers;
 [ApiController]
 public class StudentsController : Controller
 {
-    private IStudentRepository _repository;
+    private IStudentRepository _studentRepository;
     private readonly IMapper _mapper;
 
-    public StudentsController(IStudentRepository repository,IMapper mapper)
+    public StudentsController(IStudentRepository studentRepository,IMapper mapper)
     {
-        _repository = repository;
+        _studentRepository = studentRepository;
         _mapper = mapper;
     }
     
@@ -20,7 +21,7 @@ public class StudentsController : Controller
     [Route("[controller]")]
     public async Task<IActionResult> GetAllStudentsAsync()
     {
-        var students = await  _repository.GetStudentsAsync();
+        var students = await  _studentRepository.GetStudentsAsync();
         
         return Ok(_mapper.Map<List<Student>>(students));
     }
@@ -31,10 +32,26 @@ public class StudentsController : Controller
     public async Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
     {
         // Fetch student detail
-        var student = await  _repository.GetStudentAsync(studentId);
+        var student = await  _studentRepository.GetStudentAsync(studentId);
 
         // Return student
         return student is null ? NotFound() : Ok(_mapper.Map<Student>(student));
+    }
+
+    [HttpPut]
+    [Route("[controller]/{studentId:guid}")]
+    public async Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
+    {
+        if (await _studentRepository.Exists(studentId))
+        {
+            // Update student
+            var updatedStudent = await _studentRepository.UpdateStudent(studentId, _mapper.Map<DataModels.Student>(request));
+            if (updatedStudent != null)
+            {
+                return Ok(_mapper.Map<Student>(updatedStudent));
+            }
+        }
+        return NotFound();
     }
     
 }
