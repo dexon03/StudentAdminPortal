@@ -11,4 +11,5 @@ public interface IStudentRepository
     Task<Student> UpdateStudent(Guid studentId, Student request);
     Task<Student> DeleteStudent(Guid studentId);
     Task<Student> CreateStudent(Student request);
+    Task<bool> UpdateProfileImage(Guid studentId, string profileImageUrl);
 }
