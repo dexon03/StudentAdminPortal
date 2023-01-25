@@ -67,4 +67,11 @@ public class SqlStudentRepository : IStudentRepository
         
         return student;
     }
+
+    public async Task<Student> CreateStudent(Student request)
+    {
+        var student = await _context.Students.AddAsync(request);
+        await _context.SaveChangesAsync();
+        return student.Entity;
+    }
 }
