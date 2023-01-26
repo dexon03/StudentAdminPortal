@@ -20,41 +20,46 @@
 
         <div class="row">
           <div class="col-xs-6">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>First Name</mat-label>
-              <input type="text" matInput [(ngModel)] ="student.firstName" name="firstName">
+              <input type="text" matInput [(ngModel)] ="student.firstName" name="firstName" required>
+              <mat-error>Please fill this field</mat-error>
             </mat-form-field>
           </div>
           <div class="col-xs-6">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>Last Name</mat-label>
-              <input type="text" matInput [(ngModel)] ="student.lastName" name="lastName">
+              <input type="text" matInput [(ngModel)] ="student.lastName" name="lastName" required>
+              <mat-error>Please fill this field</mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>Date of Birth</mat-label>
-              <input matInput [matDatepicker]="picker" [(ngModel)] ="student.dateOfBirth" name="dateOfBirth">
+              <input matInput [matDatepicker]="picker" [(ngModel)] ="student.dateOfBirth" name="dateOfBirth" required>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <mat-error>Please fill this field</mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xs-6">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
-              <input type="email" matInput [(ngModel)] ="student.email" name="email">
+              <input type="email" matInput [(ngModel)] ="student.email" name="email" required>
+              <mat-error>Please fill this field</mat-error>
             </mat-form-field>
           </div>
           <div class="col-xs-6">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
               <mat-label>Phone Number</mat-label>
-              <input type="number" matInput [(ngModel)] ="student.phoneNumber" name="phoneNumber">
+              <input type="number" matInput [(ngModel)] ="student.phoneNumber" name="phoneNumber" required>
+              <mat-error>Please fill this field</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -62,29 +67,32 @@
 
         <div class="row">
          <div class="col-xs-12">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="fill">
             <mat-label>Gender</mat-label>
-            <mat-select [(ngModel)]="student.genderId" name="gender">
+            <mat-select [(ngModel)]="student.genderId" name="gender" required>
                 <mat-option *ngFor="let gender of genderList" [value]="gender.id">{{gender.description}}</mat-option>
             </mat-select>
+            <mat-error>Please choose the option</mat-error>
           </mat-form-field>
          </div>
         </div>
 
         <div class="row">
           <div class="col-xs-12">
-           <mat-form-field appearance="outline">
+           <mat-form-field appearance="fill">
              <mat-label>Physical Address</mat-label>
-             <textarea matInput [(ngModel)] ="student.address.physicalAddress" name="physicalAddress"></textarea>
+             <textarea matInput [(ngModel)] ="student.address.physicalAddress" name="physicalAddress" required></textarea>
+             <mat-error>Please fill this field</mat-error>
            </mat-form-field>
           </div>
          </div>
 
          <div class="row">
           <div class="col-xs-12">
-           <mat-form-field appearance="outline">
+           <mat-form-field appearance="fill">
              <mat-label>Postal Address</mat-label>
-             <textarea matInput [(ngModel)] ="student.address.postalAddress" name="postalAddress"></textarea>
+             <textarea matInput [(ngModel)] ="student.address.postalAddress" name="postalAddress" required></textarea>
+             <mat-error>Please fill this field</mat-error>
            </mat-form-field>
           </div>
          </div>
